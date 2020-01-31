@@ -1,0 +1,21 @@
+{% extends "base_authenticated.html" %}
+
+{% block content %}
+      
+<div class="grid-x">
+  <div class="cell large-2 medium-2 small-1"></div>
+  <div class="cell large-8 medium-8 small-10">
+    <div class="blog-post">
+      <h3>{{ story.title }}</h3>
+      <p>{{ story.body|linebreaksbr|safe }}</p>
+      <div class="callout">
+          Author: {{ story.user.first_name }} {{ story.user.last_name }}</br>
+          Category: <a href="category/{{ story.category.slug }}">{{ story.category.title|linebreaksbr }}</a></br>
+          Published: {{ story.posted }}
+      </div>
+    </div>
+  </div>
+  <div class="cell large-2 medium-2 small-1"></div>
+</div> <!-- End grid -->
+
+{% endblock %}

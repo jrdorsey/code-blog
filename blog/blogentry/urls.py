@@ -1,0 +1,8 @@
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<slug:the_slug>/', views.detail, name='BlogItem'),
+] 

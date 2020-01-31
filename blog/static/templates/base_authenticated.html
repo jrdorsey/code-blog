@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% comment %}
+Navigation template for authenticated pages on the MDG website.
+{% endcomment %}
+
+{% load static %}
+
+{% block nav_content %}
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas position-right" id="offCanvasRightSplit1" data-off-canvas>
+      <div class="panel callout radius">
+        <div class="panel callout radius">
+          <button class="close-button" aria-label="Close menu" type="button" data-close><span aria-hidden="true">&times;</span></button>
+          <p><h5>Member navigation</h5></p>
+        </div> <!-- End title callout -->
+        <div class="panel callout radius">
+          <ul class="vertical menu">
+            <li><a href="#">Dive planner</a></li>
+            <li><a href="#">Forms and checklists</a></li>
+            <li><a href="#">Membership forms</a></li>
+            <li><a href="#">Membership payment</a></li>
+            <li><a href="#">Club information</a></li>
+          </ul>
+        </div> <!-- End menu callout -->
+      </div> <!-- End whole panel callout -->
+      </div> <!-- End off-canvas content -->
+    </div> <!-- End off-canvaswrapper -->
+    <div class="off-canvas-content" data-off-canvas-content>
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock%}
