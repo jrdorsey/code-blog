@@ -25,7 +25,7 @@ class BlogEntry(models.Model):
 def get_image_filename(instance, filename):
     title = instance.post.title
     slug = slugify(title)
-    server_filename = "media/images/%s-%s" % (slug, filename)
+    server_filename = "images/%s-%s" % (slug, filename)
     return server_filename
 
 class BlogImage(models.Model):

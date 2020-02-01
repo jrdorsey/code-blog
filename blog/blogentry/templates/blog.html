@@ -1,4 +1,4 @@
-{% extends "base_authenticated.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="grid-x">
@@ -8,11 +8,12 @@
     <div class="blog-post">
       <h3>{{ post.title }}</h3>
       <p>Published: {{ post.posted }}</p>
-      <p>{{ post.body|linebreaksbr|truncatewords:25 }}... <a href="{{ post.slug }}">read full story</a></p>  <!-- post.body|linebreaksbr -->
+      <p>{{ post.body|linebreaksbr|truncatewords:100 }}... <a href="{{ post.slug }}">read full story</a></p>  <!-- post.body|linebreaksbr -->
       <div class="callout">
           Category: <a href="category/{{ post.category.slug }}">{{ post.category.title|linebreaksbr }}</a>
       </div>
     </div>
+    <hr>
   </div>
   <div class="cell large-2 medium-2 small-1"></div>
   {% endfor %}
