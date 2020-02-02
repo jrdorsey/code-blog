@@ -21,8 +21,8 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('contact/', TemplateView.as_view(template_name="contact.html")),
-    path('admin/', admin.site.urls),
+    path('', include('contact.urls')),
+    path('tinker/', admin.site.urls),
     path('', include('blogentry.urls')),
 ]
 urlpatterns= urlpatterns + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

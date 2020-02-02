@@ -7,16 +7,20 @@ from .models import BlogEntry, BlogImage, BlogCodeSnippet
 def index(request):
     latest_blog_list = BlogEntry.objects.filter(posted__lte=timezone.now()).order_by('-posted')
     for story in latest_blog_list:
+        doneSafeString = False
         image_list = BlogImage.objects.filter(post=story)
         codesnippet_list = BlogCodeSnippet.objects.filter(post=story)
         for image in image_list:
+            doneSafeString = True
             story.body = SafeString(story.body.replace(image.anchor, "<img src=\"" + image.image.url + "\" alt=\"" + image.caption + "\">" + "\n" + image.caption + "\n"))
         for codesnippet in codesnippet_list:
+            doneSafeString = True
             if bool(codesnippet.caption):
                 story.body = SafeString(story.body.replace(codesnippet.anchor, "<div class=\"callout\"><code>" + codesnippet.caption + "</code><pre id=\"" + codesnippet.anchor + "\">" + codesnippet.CodeSnippet + "</pre></div>"))
             else:
                 story.body = SafeString(story.body.replace(codesnippet.anchor, "<div class=\"callout\"><pre id=\"" + codesnippet.anchor + "\">" + codesnippet.CodeSnippet + "</pre></div>"))
-         
+        if not(doneSafeString):
+            story.body = SafeString(story.body)
     return render(request, "blog.html", {"latest_blogs": latest_blog_list})
 
 def detail(request, the_slug):
@@ -24,15 +28,20 @@ def detail(request, the_slug):
         blog_item = BlogEntry.objects.get(slug=the_slug)
     except BlogEntry.DoesNotExist:
         raise Http404('That blog article doesn\'t exist')
+    doneSafeString = False
     image_list = BlogImage.objects.filter(post=blog_item)
     codesnippet_list = BlogCodeSnippet.objects.filter(post=blog_item)
     for image in image_list:
+        doneSafeString = True
         blog_item.body = SafeString(blog_item.body.replace(image.anchor, "<img src=\"" + image.image.url + "\" alt=\"" + image.caption + "\">" + "\n" + image.caption + "\n"))
     for codesnippet in codesnippet_list:
+        doneSafeString = True
         if bool(codesnippet.caption):
             blog_item.body = SafeString(blog_item.body.replace(codesnippet.anchor, "<div class=\"callout\"><code>" + codesnippet.caption + "</code><pre id=\"" + codesnippet.anchor + "\">" + codesnippet.CodeSnippet + "</pre></div>"))
         else:
             blog_item.body = SafeString(blog_item.body.replace(codesnippet.anchor, "<div class=\"callout\"><pre id=\"" + codesnippet.anchor + "\">" + codesnippet.CodeSnippet + "</pre></div>"))
+    if not(doneSafeString):
+        blog_item.body = SafeString(blog_item.body)
     return render(request, "blogitem.html", {"story": blog_item, "images": image_list})
 
 def handler404(request):

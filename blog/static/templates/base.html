@@ -2,22 +2,19 @@
 Base template for pages on the blog.
 Does not include the admin interface which is handled by django.
 {% endcomment %}
-
 {% load static %}
-
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>blog.dorsey.xyz | Welcome</title>
   <link rel="stylesheet" href="/static/css/foundation.css">
-  <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen&display=swap">
   <link rel="stylesheet" href="/static/css/codemirror.css">
   <link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico"/>
+  <title>blog.dorsey.xyz | Notes, reminders and thoughts</title>
 </head>
-  <body style="font-family: Oxygen">
-  
+<body style="font-family: Oxygen">
 {% block styles %}
 <style>
 body {
@@ -35,6 +32,10 @@ h3 {
   font-family: 'Oxygen'; font-size: 20; color: #2C3539;
 }
 
+h4 {
+  font-family: 'Oxygen'; font-size: 20; color: #2C3539;
+}
+
 </style>
 {% endblock styles %}
 
@@ -46,7 +47,7 @@ h3 {
         <div class="top-bar-left">
           <ul class="menu menu-hover-lines" data-dropdown-menu>
             <li><a href="/">HOME</a></li>
-            <li><a href="/contact">CONTACT</a></li>
+            <li><a href="/contact/">CONTACT</a></li>
           </ul>
         </div> <!-- End top-bar-left -->
         <div class="top-bar-right">
